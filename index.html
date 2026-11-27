@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light dark">
+<title>Curso Desarrollo Administradores</title>
+<style>
+:root{--bg:#faf6ef;--sf:#fff;--ink:#2b2118;--mu:#6f6154;--ac:#8a3324;--ai:#fff;--ln:#e3d9c8;--ch:#f3ead9;--sh:0 1px 3px rgba(60,40,20,.12)}
+@media(prefers-color-scheme:dark){:root{--bg:#171310;--sf:#221c17;--ink:#f0e7da;--mu:#b8a893;--ac:#d98a6a;--ai:#221610;--ln:#3a3128;--ch:#2c241c;--sh:0 1px 3px rgba(0,0,0,.5)}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+h1,h2,h3{font-family:Palatino,Georgia,serif;line-height:1.25;margin:0}
+main{max-width:680px;margin:0 auto;padding:0 14px 72px}
+body.lock main{display:none}
+#gate{display:none;min-height:100vh;align-items:center;justify-content:center;padding:20px}
+body.lock #gate{display:flex}
+#gate form{background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:24px;max-width:340px;width:100%;box-shadow:var(--sh);text-align:center}
+#gate h1{font-size:1.3rem;margin-bottom:6px}
+#gate p{color:var(--mu);margin:0 0 14px;font-size:.95rem}
+input{width:100%;padding:12px;border:1px solid var(--ln);border-radius:10px;background:var(--sf);color:var(--ink);font-size:1rem}
+.b{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 18px;border:0;border-radius:8px;background:var(--ac);color:var(--ai);font-size:1rem;cursor:pointer;text-decoration:none}
+.b.s{background:var(--ch);color:var(--ink);border:1px solid var(--ln)}
+#gate .b{width:100%;margin-top:10px}
+#err{color:var(--ac);min-height:1.4em;font-size:.9rem;margin-top:8px}
+header{text-align:center;padding:26px 0 8px}
+header h1{font-size:1.7rem}
+header p{color:var(--mu);margin:6px 0 0}
+.card{background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:18px 16px 20px;margin:16px 0;box-shadow:var(--sh)}
+.num{color:var(--ac);font-weight:600;letter-spacing:.02em}
+.card h2{font-size:1.6rem;text-align:center;margin:6px 0 4px}
+.txt{white-space:pre-line;background:var(--ch);border-radius:10px;padding:12px 14px;margin:12px 0;overflow-wrap:break-word}
+.nt{color:var(--mu);font-style:italic;margin:10px 0}
+img{display:block;max-width:100%;height:auto;border-radius:10px;margin:12px auto}
+img.st{max-width:160px}
+video.tg{max-width:220px;aspect-ratio:auto;max-height:none;margin:10px auto 6px}
+video{display:block;width:100%;aspect-ratio:4/3;max-height:75vh;object-fit:contain;background:#000;border-radius:10px;margin:12px auto}
+.au{display:flex;align-items:center;gap:8px;background:var(--ch);border-radius:999px;padding:6px 12px;margin:12px 0}
+.au audio{flex:1;width:100%;height:40px}
+.doc{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--ln);border-radius:10px;padding:10px 12px;margin:12px 0}
+.doc span{font-size:.92rem;overflow-wrap:anywhere;flex:1 1 180px}
+.doc div{display:flex;gap:8px}
+#idx{list-style:none;margin:10px 0 0;padding:0}
+#idx a{display:block;padding:7px 4px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ln)}
+#idx a b{color:var(--ac);margin-right:6px}
+.ct h3{font-size:1.05rem;margin:14px 0 4px}
+.ct a{color:var(--ac)}
+.ct p{margin:2px 0}
+html{scroll-padding-top:66px}
+#bar{position:sticky;top:0;z-index:20;display:flex;gap:8px;padding:8px 0;background:var(--bg);border-bottom:1px solid var(--ln)}
+#bar a,#bar button{flex:1;display:flex;align-items:center;justify-content:center;min-height:44px;padding:0 8px;border:1px solid var(--ln);border-radius:10px;background:var(--sf);color:var(--ink);font-size:.95rem;font-weight:600;text-decoration:none;cursor:pointer}
+#bar .p{background:var(--ac);color:var(--ai);border-color:var(--ac)}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.hd a{color:var(--ac);font-size:.9rem;text-decoration:none;padding:6px 0 6px 10px}
+#grid{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.55);display:none;align-items:flex-end;justify-content:center}
+#grid.on{display:flex}
+body.lock #grid{display:none}
+#grid .sh{background:var(--sf);width:100%;max-width:680px;border-radius:16px 16px 0 0;padding:16px 14px 22px;max-height:85vh;overflow:auto}
+#grid .tt{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-weight:600}
+#gn{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+#gn a{display:flex;align-items:center;justify-content:center;min-height:46px;border:1px solid var(--ln);border-radius:8px;background:var(--ch);color:var(--ink);text-decoration:none;font-weight:700}
+@media(min-width:760px){.card{padding:24px 26px}}
+</style>
+</head>
+<body class="lock">
+<div id="gate">
+<form id="f">
+<h1>Curso Desarrollo Administradores</h1>
+<p>Acceso solo para administradores</p>
+<input id="pw" type="password" placeholder="Contraseña" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+<label style="display:block;margin-top:8px;font-size:.9rem;color:var(--mu)"><input type="checkbox" id="sh" style="width:auto;margin-right:6px" onchange="document.getElementById('pw').type=this.checked?'text':'password'">Mostrar contraseña</label>
+<button class="b" type="submit">Entrar</button>
+<div id="err"></div>
+</form>
+</div>
+<main>
+<div id="bar"><a href="#top">↑ Inicio</a><a class="p" href="#indice">☰ Índice</a><button type="button" id="bn"># Tema</button></div>
+<header id="top">
+<h1>Curso Desarrollo Administradores</h1>
+<p>Mini tutoriales autodidactas</p>
+</header>
+<section class="card" id="ini"></section>
+<div id="pts"></div>
+<section class="card" id="fin"></section>
+</main>
+<div id="grid"><div class="sh"><div class="tt"><span>Ir al tema número…</span><button type="button" class="b s" id="gc" style="min-height:36px;padding:4px 14px">Cerrar</button></div><div id="gn"></div></div></div>
+<script>
+var HASH=6073559843384242;
+function cyrb53(s){var h1=0xdeadbeef,h2=0x41c6ce57,c,i;for(i=0;i<s.length;i++){c=s.charCodeAt(i);h1=Math.imul(h1^c,2654435761);h2=Math.imul(h2^c,1597334677)}h1=Math.imul(h1^(h1>>>16),2246822507);h1^=Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507);h2^=Math.imul(h1^(h1>>>13),3266489909);return 4294967296*(2097151&h2)+(h1>>>0)}
+function unlock(){document.body.classList.remove('lock')}
+try{if(sessionStorage.getItem('ok')==='1')unlock()}catch(e){}
+document.getElementById('f').onsubmit=function(e){e.preventDefault();
+ if(cyrb53(document.getElementById('pw').value.trim().toLowerCase())===HASH){try{sessionStorage.setItem('ok','1')}catch(x){}unlock()}
+ else document.getElementById('err').textContent='Contraseña incorrecta'};
+
+/* ===== CONTENIDO ===== */
+/* Tipos de archivo: i=imagen(con extensión) a=audio(sin .mp3) v=video(sin .mp4, póster .jpg) s=sticker d=documento "archivo|nombre" */
+var T=["Dónde veo mi número de celular completo ?","Cómo buscar un nombre o un número de celular ?","Funciones principales del \"ADMINISTRADOR\".","Formato control de evaluaciones.","Identificación del administrador.","Chat Conversacional (Miércoles).","Normas y reglas.","Cómo publicar el tema en el grupo de WhatsApp","Ejercicio y ejemplo de cómo no se debe publicar","Cada cuándo revisar los mensajes ?","Cómo restablecer un enlace ?","Cómo abrir un chat ?","Cómo cerrar un chat ?","Cómo compartir archivos DOC y PDF ?","Cómo copiar y compartir un enlace ?","Cómo proteger Telegram ?","Cómo subir un video y un enlace a grupos de Facebook ?","Cuál es la cobertura y alcance de los administradores ?","Estructura del curso.","Dónde sacar los temas a publicar ?","Qué actividad será asignada al concluir el curso ?","Cómo identificar para quién va dirigida una publicación ?","Cuándo ABRIR y CERRAR el Chat o Conversacional ?","Cómo compartir AUDIOS y/o VIDEOS ?","Qué hacer si no existe la opción de compartir ?","Generalidades del Cuestionario.","Prohibido enviar mensajes y/o realizar llamadas al privado de los alumnos.","A quién designar como administrador del grupo ?","Permanencia del alumno y del administrador en el mismo grupo durante el curso. Oficina de los Administradores.","Logotipo oficial para promover el curso.","Video promocional, para acompañar el logotipo anterior.","No molestar al alumno en su teléfono privado.","Cómo crear un grupo nuevo ?","Cómo cambiar o agregar un logotipo a un grupo ?","Qué permisos activar o desactivar para los alumnos en el grupo de WhatsApp ?","Información del perfil del administrador en WhatsApp.","Cómo identificar a mis administradores del grupo o comunicarme con ellos ?","Cómo abrir y cerrar el chat ? (recordatorio y repaso)","Cómo resetear un enlace en TELEGRAM ?","Cómo evitar el hackeo o robo de un grupo ?","Cómo \"crear una copia de seguridad\" en WhatsApp ?","Cómo identificar y buscar una llamada recibida por WhatsApp ?","Cómo proteger el WhatsApp en dos pasos","Cómo hacer una captura de pantalla en un teléfono Samsung","Qué información debe tener o contener mi grupo de WhatsApp","Cómo colocar una imagen o un video promocional a un enlace","Cómo se usa la Inteligencia Artificial","Opciones para realizar el apoyo a los alumnos","Curso Apologética Católica"];
+var TOTAL=49; 
+
+var TXT={
+6:"🚨📌NOTA:\n\nEl día de hoy (Miércoles) al mediodía (horario Venezuela) se abrirá el... 🔓\n\n✨CONVERSATORIO (CHAT)✨\n\n...la finalidad es compartir acerca del Tema inmediato visto: 🎯\n\n¿Qué te pareció? 🙂\n¿Qué aprendiste y no sabías? 📊\n¿Qué citas bíblicas debieron estar en el tema y por qué? 📖\n\nPor favor participar con cordura y respeto.\nIdentificarse al final con su NOMBRE y PAÍS. 🌎\n\nSe prohíbe adjuntar fotografías, cadenas, enlaces de vídeos, enviar privados a listado de alumnos y/o estudiantes (respetar su privacidad), etc. 🚫\n\nY recordar las Reglas del Grupo. 📝",
+19:"ESTRUCTURA DEL CURSO\n\nLos TEMAS se publican cada semana de la forma siguiente:\n\na) Los lunes la primera parte.\nb) Los martes la segunda parte, hay temas con tercera parte.\nc) Los miércoles los audios (hay temas sin audio), cuestionarios y chat-conversacional. (Hay temas sin cuestionario.)\n\nEl tema se publica la noche anterior o el mismo día temprano por la mañana.\n\nEl tema es publicado por WhatsApp en tres formas de estudio; el alumno estudiará con el método que más le agrade (siempre recibirá automáticamente las tres formas):\n\na) Tema escrito simple como un mensaje.\nb) Tema en archivo DOC y PDF (el alumno deberá contar con la aplicación de su elección para abrirlo, leerlo e imprimirlo).\nc) Tema en audios.\n\nEl Chat o Conversacional se abre los miércoles a las 12 am horario de Venezuela (las reglas para su uso se publican cada miércoles).\n\nLos temas incluyen el enlace del video del Padre Luis Toro. (Hay videos ya no disponibles en YouTube.)\n\nLa vigencia del cuestionario inicia el miércoles que se publica, hasta el próximo miércoles a las 6 pm hora de Venezuela.\n\nTodo alumno que elija contestar el cuestionario debe contar con un CORREO ELECTRÓNICO.\n\nEs elección libre del alumno contestar SÍ o NO el cuestionario, sin que afecte su permanencia en el curso.\n\nEl alumno que SÍ opte por contestar el cuestionario deberá obtener un 70% (mínimo) de respuestas acertadas en cada examen, de cada uno de los tres niveles del curso; solo así obtendrá un certificado con la firma del Padre Luis Toro.\n\nNo está permitido que un alumno envíe mensajes a otro alumno; de suceder esto, reportarlo de inmediato a su administrador del grupo, podría causar baja del curso."
+};
+
+var CONTACTOS='<div class="ct"><h3>Responsables de cuestionarios</h3><p>Si tienen algún pendiente con sus cuestionarios, calificaciones o certificados, contacten directamente al responsable de su nivel (toquen el número para abrir su WhatsApp).</p>'+
+[["NIVEL 1",[["Ernesto Williams Rojas","573157820672"],["Elicka Mendoza","593992598716"]]],["NIVEL 2",[["Erick Mazier","17028880613"],["Federico Ronaldi","595961624694"]]],["NIVEL 3",[["Fabio Clavijo","573208322291"],["Gilmar Hernández","15169065923"]]]].map(function(n){return '<h3>'+n[0]+'</h3>'+n[1].map(function(p){return '<p>👤 '+p[0]+' · <a href="https://wa.me/'+p[1]+'" target="_blank" rel="noopener">+'+p[1]+'</a></p>'}).join('')}).join('')+'</div>';
+
+
+var X={26:CONTACTOS};
+
+var M={
+1:["i:IMG-20260525-WA0007.jpg","a:AUD-20251114-WA0012","v:VID-20261123-WA0006"],
+2:["i:IMG-20251115-WA0031.jpg","v:VID-20261123-WA0007"],
+3:["i:IMG-20251115-WA0032.jpg","a:AUD-20251114-WA0013","a:AUD-20251114-WA0014","a:AUD-20251114-WA0015","a:AUD-20251114-WA0016","a:AUD-20251114-WA0017"],
+4:["a:AUD-20251114-WA0018","i:IMG-20260525-WA0010.jpg","i:IMG-20260525-WA0011.jpg","i:IMG-20260525-WA0012.jpg","i:IMG-20240725-WA0006.jpg","d:DOC-20260525-WA0037.docx|Formato en Word (solo descargar)|dl","d:formato-control-evaluaciones.pdf|Formato control de envío de evaluaciones"],
+5:["i:IMG-20260525-WA0013.jpg","v:VID-20261123-WA0008"],
+6:["i:IMG-20260526-WA0003.jpg","a:AUD-20251114-WA0019"],
+7:["i:IMG-20260526-WA0004.jpg","i:IMG-20250618-WA0004.jpg","i:IMG-20251114-WA0020.jpg"],
+8:["i:IMG-20260526-WA0005.jpg","v:VID-20261123-WA0010"],
+9:["i:IMG-20260526-WA0007.jpg","a:AUD-20251114-WA0028","i:IMG-20261123-WA0011.jpg","i:IMG-20251114-WA0027.jpg"],
+10:["i:IMG-20251116-WA0007.jpg","i:IMG-20260526-WA0008.jpg","a:AUD-20251114-WA0029"],
+11:["i:IMG-20251116-WA0008.jpg","v:VID-20261124-WA0005"],
+12:["i:IMG-20260526-WA0009.jpg","v:VID-20261124-WA0007"],
+13:["i:IMG-20260526-WA0010.jpg","v:VID-20261124-WA0006"],
+14:["i:IMG-20251116-WA0009.jpg","n:Video no disponible: WhatsApp lo exportó como \"multimedia omitido\"."],
+15:["i:IMG-20251116-WA0010.jpg","v:VID-20261124-WA0010"],
+16:["i:IMG-20251116-WA0011.jpg","v:VID-20261124-WA0011","a:AUD-20251201-WA0019"],
+17:["i:IMG-20251116-WA0014.jpg","a:AUD-20251201-WA0020"],
+18:["i:IMG-20251116-WA0015.jpg","a:AUD-20251114-WA0053"],
+19:["i:IMG-20261124-WA0015.jpg"],
+20:["i:IMG-20260527-WA0008.jpg","a:AUD-20251114-WA0054","i:IMG-20251114-WA0055.jpg","a:AUD-20251114-WA0056","i:IMG-20260527-WA0009.jpg","i:IMG-20261124-WA0018.jpg","i:IMG-20261124-WA0022.jpg","v:VID-20261124-WA0023"],
+21:["i:IMG-20260527-WA0010.jpg","a:AUD-20251114-WA0053"],
+22:["i:IMG-20260527-WA0011.jpg","a:AUD-20251114-WA0059","i:IMG-20260527-WA0012.jpg","n:El sticker verde del que habla el audio es este 👇👇👇","i:IMG-20260527-WA0013.jpg","n:Se ha ido cambiando, no afecta el color, la forma o la imagen; deben poner atención de lo que dice 👇👇","s:STK-20260407-WA0002.webp","a:AUD-20251115-WA0003","i:IMG-20260527-WA0015.jpg"],
+23:["i:IMG-20260527-WA0016.jpg","a:AUD-20251115-WA0004"],
+24:["i:IMG-20260527-WA0017.jpg","i:IMG-20251115-WA0005.jpg","a:AUD-20251115-WA0007","a:AUD-20251115-WA0008"],
+25:["i:IMG-20260527-WA0019.jpg","a:AUD-20251115-WA0009","i:IMG-20260527-WA0020.jpg","i:IMG-20260527-WA0021.jpg","i:IMG-20251115-WA0010.jpg"],
+26:["i:IMG-20260528-WA0000.jpg","a:AUD-20251202-WA0013","a:AUD-20251115-WA0011","a:AUD-20251115-WA0012","a:AUD-20251115-WA0013","d:DOC-20260215-WA0156.pdf|Aviso oficial: responsables de cuestionarios (PDF)"],
+27:["i:IMG-20260528-WA0003.jpg","a:AUD-20260528-WA0001","a:AUD-20251115-WA0015","a:AUD-20251115-WA0016"],
+28:["i:IMG-20260528-WA0005.jpg","a:AUD-20251115-WA0017","a:AUD-20251115-WA0018"],
+29:["i:IMG-20260528-WA0002.jpg","a:AUD-20251115-WA0019","a:AUD-20251115-WA0020"],
+30:["i:IMG-20260528-WA0004.jpg","i:IMG-20261124-WA0022.jpg","a:AUD-20251202-WA0023"],
+31:["i:IMG-20260528-WA0006.jpg","v:VID-20261125-WA0007","i:IMG-20260528-WA0008.jpg"],
+32:["i:IMG-20260528-WA0007.jpg","a:AUD-20251203-WA0011"],
+33:["i:IMG-20260528-WA0009.jpg","v:VID-20261125-WA0009"],
+34:["i:IMG-20260528-WA0011.jpg","a:AUD-20251115-WA0021","v:VID-20261125-WA0008"],
+35:["i:IMG-20260528-WA0010.jpg","v:VID-20261125-WA0010"],
+36:["i:IMG-20260529-WA0003.jpg","i:IMG-20261126-WA0022.jpg"],
+37:["i:IMG-20260529-WA0002.jpg","v:VID-20261126-WA0023"],
+38:["i:IMG-20260529-WA0007.jpg","v:VID-20261126-WA0024"],
+39:["i:IMG-20260529-WA0008.jpg","v:VID-20261126-WA0025"],
+40:["i:IMG-20260529-WA0009.jpg","a:AUD-20251203-WA0018"],
+41:["i:IMG-20260529-WA0006.jpg","v:VID-20261126-WA0026"],
+42:["i:IMG-20260529-WA0005.jpg","v:VID-20261126-WA0027","v:VID-20261126-WA0028"],
+43:["i:IMG-20260529-WA0010.jpg","v:VID-20261126-WA0029"],
+44:["i:IMG-20260529-WA0011.jpg","v:VID-20261126-WA0030"],
+45:["i:IMG-20261126-WA0031.jpg","v:VID-20261126-WA0033"],
+46:["i:IMG-20261126-WA0034.jpg","v:VID-20261126-WA0036"],
+47:["i:IMG-20261126-WA0035.jpg","v:VID-20261126-WA0039"],
+48:["i:IMG-20261126-WA0037.jpg","v:VID-20261126-WA0038"],
+49:["n:Índice de todos los temas. Busca el número y toca el botón # Tema de arriba para ir directo.","i:indice-temas-2.jpg","i:IMG-20261126-WA0040.jpg"]
+};
+var NOGIF={11:1,21:1}; /* puntos que Justino publicó sin el gif tutorial */
+
+var INICIO=["i:bienvenida.jpg","v:VID-20261122-WA0013","v:VID-20261123-WA0004","a:AUD-20251114-WA0011","i:IMG-20260525-WA0005.jpg","a:AUD-20251114-WA0008","a:AUD-20251114-WA0009","a:AUD-20251114-WA0010","d:DOC-20260525-WA0014.pdf|Tema: ¿Para ustedes qué es la Administración?"];
+
+var FIN="COMUNICADO - FIN DE MINI TUTORIALES\n\nDamos hoy por concluido el envío de mini tutoriales autodidactas.\n\nLa directiva agradece a todos los futuros administradores su interés en haber tomado los presentes mini tutoriales.\n\n🙏 AGRADECIMIENTO ESPECIAL\n\nLa dirección general agradece a los hermanos coordinadores:\n• Edgar Hernández - Creador de contenidos\n• Gil Valdez - Encargado de supervisar y dar acceso al grupo a los nuevos administradores\n\n📌 AVISO PARA FUTUROS ADMINISTRADORES\n\nSi tienen la habilidad de editar un mini tutorial sobre un tema de utilidad para este curso, con toda confianza háganselo llegar al responsable por privado. Si requieren un mini tutorial de interés general para este grupo, también pueden pedirlo.";
+
+/* ===== DIBUJAR ===== */
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function media(list){return list.map(function(m){var k=m[0],v=m.slice(2),a='assets/';
+ if(k==='i')return '<img'+(v.indexOf('indice-')===0?' id="indice"':'')+' loading="lazy" alt="" src="'+a+v+'">';
+ if(k==='s')return '<img class="st" loading="lazy" alt="" src="'+a+v+'">';
+ if(k==='a')return '<div class="au"><span>🎧</span><audio controls preload="none"><source src="'+a+v+'.m4a" type="audio/mp4"><source src="'+a+v+'.mp3" type="audio/mpeg"><source src="'+a+v+'.opus" type="audio/ogg; codecs=opus"></audio></div>';
+ if(k==='v')return '<video controls playsinline preload="metadata" src="'+a+v+'.mp4"></video>';
+ if(k==='d'){var p=v.split('|');if(p[2]==='dl')return '<div class="doc"><span>'+esc(p[1])+'</span><div><a class="b s" download href="'+a+p[0]+'">Descargar</a></div></div>';return '<div class="doc"><span>'+esc(p[1]||p[0])+'</span><div><a class="b" target="_blank" rel="noopener" href="'+a+p[0]+'">Abrir</a><a class="b s" download href="'+a+(p[2]||p[0])+'">Descargar</a></div></div>'}
+ if(k==='n')return '<p class="nt">'+esc(v)+'</p>';return ''}).join('')}
+var pts='';
+for(var n=1;n<=TOTAL;n++){var t=T[n-1]||'',m=M[n];
+ pts+='<section class="card" id="p'+n+'"><div class="hd"><span class="num">Punto '+n+'</span><a href="#indice">☰ Índice</a></div>'+(t?'<h2>'+esc(t)+'</h2>':'')+(NOGIF[n]?'':'<video class="tg" autoplay muted loop playsinline preload="metadata" src="assets/VID-20261123-WA0005.mp4"></video>')+(m?media(m):'<p class="nt">Contenido por agregar.</p>')+(TXT[n]?'<div class="txt">'+esc(TXT[n])+'</div>':'')+(X[n]||'')+'</section>'}
+document.getElementById('pts').innerHTML=pts;
+document.getElementById('ini').innerHTML=media(INICIO);
+document.getElementById('fin').innerHTML='<div class="txt">'+esc(FIN)+'</div><h2 style="margin-top:18px">Felicitación del subdirector</h2>'+media(["a:PTT-20261126-WA0055"]);
+var tg=document.querySelectorAll('video.tg');
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var pr=e.target.play();if(pr&&pr.catch)pr.catch(function(){})}else e.target.pause()})},{threshold:.4});[].forEach.call(tg,function(v){v.muted=true;io.observe(v)})}else{[].forEach.call(tg,function(v){v.autoplay=true})}
+function goTo(id){
+ if(id==='top'){window.scrollTo({top:0,behavior:'instant'});return}
+ var el=document.getElementById(id);if(!el)return;
+ var stop=false,t0=Date.now(),last=t0;
+ function cancel(){stop=true}
+ ['touchstart','wheel','keydown','mousedown'].forEach(function(ev){window.addEventListener(ev,cancel,{once:true,passive:true})});
+ (function step(){
+  if(stop)return;
+  var o=el.getBoundingClientRect().top-66;
+  if(Math.abs(o)>2){window.scrollBy({top:o,behavior:'instant'});last=Date.now()}
+  if(Date.now()-last<900&&Date.now()-t0<10000)requestAnimationFrame(step);
+ })();
+}
+document.addEventListener('click',function(e){
+ var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;
+ var id=a.getAttribute('href').slice(1);
+ if(id!=='top'&&!document.getElementById(id))return;
+ e.preventDefault();goTo(id);
+});
+var gh='';for(var g=1;g<=TOTAL;g++)gh+='<a href="#p'+g+'">'+g+'</a>';
+document.getElementById('gn').innerHTML=gh;
+var gd=document.getElementById('grid');
+document.getElementById('bn').onclick=function(){gd.classList.add('on')};
+gd.onclick=function(e){if(e.target===gd||e.target.id==='gc'||e.target.tagName==='A')gd.classList.remove('on')};
+</script>
+</body>
+</html>
